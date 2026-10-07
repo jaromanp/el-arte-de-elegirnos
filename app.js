@@ -153,19 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // =========================================================
-  // 5. MODAL CINEMA DE VIDEO INTERACTIVO
-  // =========================================================
-  const videoCards = document.querySelectorAll('[data-video-src]');
-  videoCards.forEach(card => {
-    card.addEventListener('click', (e) => {
+  // Manejador por delegación para asegurar que siempre responda al clic dentro de StPageFlip
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-video-src]');
+    if (card) {
       e.stopPropagation();
       const videoSrc = card.getAttribute('data-video-src');
       const title = card.getAttribute('data-video-title') || 'Video Especial';
       const subtitle = card.getAttribute('data-video-desc') || 'Nuestro momento';
-
       openVideoModal(videoSrc, title, subtitle);
-    });
+    }
   });
 
   function openVideoModal(src, title, subtitle) {
