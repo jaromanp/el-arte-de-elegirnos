@@ -184,8 +184,22 @@ document.addEventListener('DOMContentLoaded', () => {
     modalVideo.play().catch(() => {});
   }
 
-  function closeVideoModal() {
+  function closeVideoModal(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }
     if (!videoModal || !modalVideo) return;
+
+    // Desactivar temporalmente los clics en el flipbook para evitar que se pase la página por "click-through"
+    if (flipbookEl) {
+      flipbookEl.style.pointerEvents = 'none';
+      setTimeout(() => {
+        flipbookEl.style.pointerEvents = '';
+      }, 400);
+    }
+
     modalVideo.pause();
     modalVideo.src = '';
     videoModal.classList.remove('active');
@@ -199,17 +213,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeVideoModal);
+  if (modalCloseBtn) {
+    ['click', 'mousedown', 'pointerdown', 'mouseup', 'pointerup', 'touchstart', 'touchend'].forEach(evt => {
+      modalCloseBtn.addEventListener(evt, (e) => {
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        if (evt === 'click' || evt === 'touchend') {
+          closeVideoModal(e);
+        }
+      });
+    });
+  }
+
   if (videoModal) {
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) closeVideoModal();
+    ['click', 'mousedown', 'pointerdown', 'mouseup', 'pointerup', 'touchstart', 'touchend'].forEach(evt => {
+      videoModal.addEventListener(evt, (e) => {
+        if (e.target === videoModal) {
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          if (evt === 'click' || evt === 'touchend') {
+            closeVideoModal(e);
+          }
+        }
+      });
     });
   }
 
   // Tecla Escape cierra modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && videoModal && videoModal.classList.contains('active')) {
-      closeVideoModal();
+      closeVideoModal(e);
     }
   });
 
