@@ -1,0 +1,1114 @@
+/* =========================================================
+   EL ARTE DE ELEGIRNOS - VOL. II
+   Estilos editoriales para Revista Virtual Interactiva
+   ========================================================= */
+
+:root {
+  --paper-bg: #FAF8F5;
+  --paper-texture: #F5F2EB;
+  --ink-primary: #1C1E21;
+  --ink-secondary: #4A4F55;
+  --ink-muted: #7E858E;
+  --accent-blue: #3E6B89;
+  --accent-light-blue: #D8E5ED;
+  --accent-gold: #C5A059;
+  --ferxxo-green: #00E676;
+  --shadow-paper: 0 15px 35px rgba(0, 0, 0, 0.18), 0 5px 15px rgba(0, 0, 0, 0.08);
+  --shadow-polaroid: 0 8px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --font-serif-display: 'Playfair Display', Georgia, serif;
+  --font-serif-body: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-hand: 'Caveat', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: radial-gradient(circle at center, #2C343D 0%, #151A1E 100%);
+  font-family: var(--font-sans);
+  color: var(--ink-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* =========================================================
+   BARRA SUPERIOR (HEADER & MÚSICA)
+   ========================================================= */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(21, 26, 30, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #FFFFFF;
+}
+
+.nav-title h1 {
+  font-family: var(--font-serif-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.nav-badge {
+  background: rgba(62, 107, 137, 0.35);
+  border: 1px solid rgba(216, 229, 237, 0.3);
+  color: #D8E5ED;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.music-player-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 6px 14px 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.music-player-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.vinyl-disk {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff5e7e 22%, #111 23%, #333 45%, #111 50%, #444 80%, #000 100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl-disk::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #FFF;
+  border-radius: 50%;
+}
+
+.music-playing .vinyl-disk {
+  animation-play-state: running;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.music-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #FFF;
+}
+
+.music-artist {
+  font-size: 0.65rem;
+  color: #A0AAB5;
+}
+
+.music-waves {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  margin-left: 4px;
+}
+
+.music-waves span {
+  width: 2.5px;
+  height: 4px;
+  background: #3E6B89;
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.music-playing .music-waves span {
+  background: #00E676;
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.music-playing .music-waves span:nth-child(1) { animation-delay: 0.1s; }
+.music-playing .music-waves span:nth-child(2) { animation-delay: 0.3s; }
+.music-playing .music-waves span:nth-child(3) { animation-delay: 0.2s; }
+.music-playing .music-waves span:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+
+/* =========================================================
+   CONTENEDOR DE LA REVISTA
+   ========================================================= */
+.magazine-viewport {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 120px);
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2500px;
+  padding: 15px;
+}
+
+#flipbook {
+  box-shadow: var(--shadow-paper);
+  background: transparent;
+  transition: transform 0.3s ease;
+}
+
+/* =========================================================
+   ESTILOS DE PÁGINA INDIVIDUAL
+   ========================================================= */
+.page {
+  background: var(--paper-bg);
+  background-image: 
+    radial-gradient(#00000005 1px, transparent 1px),
+    linear-gradient(to right, rgba(0,0,0,0.03) 0%, transparent 8%, transparent 92%, rgba(0,0,0,0.03) 100%);
+  background-size: 20px 20px, 100% 100%;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  width: 100%;
+  height: 100%;
+  padding: 38px 36px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   DECORACIÓN & BALLENA (IDENTIDAD VOL 1 & VOL 2)
+   ========================================================= */
+.whale-icon {
+  position: absolute;
+  width: 72px;
+  height: auto;
+  opacity: 0.78;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+}
+
+.whale-top-right {
+  top: 26px;
+  right: 28px;
+}
+
+.whale-bottom-left {
+  bottom: 24px;
+  left: 28px;
+}
+
+.whale-center-floating {
+  position: absolute;
+  bottom: 60px;
+  right: 40px;
+  width: 90px;
+  opacity: 0.65;
+}
+
+/* Header editorial de página */
+.page-header {
+  margin-bottom: 20px;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 12px;
+}
+
+.page-category {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.page-title {
+  font-family: var(--font-serif-display);
+  font-size: 1.65rem;
+  line-height: 1.18;
+  color: var(--ink-primary);
+  font-weight: 700;
+}
+
+.page-title.large {
+  font-size: 2.05rem;
+}
+
+/* Texto editorial */
+.editorial-text {
+  font-family: var(--font-serif-body);
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: #2D3136;
+  text-align: justify;
+  margin-bottom: 14px;
+}
+
+.editorial-text p {
+  margin-bottom: 12px;
+  text-indent: 1.2em;
+}
+
+.editorial-text p:first-of-type {
+  text-indent: 0;
+}
+
+.editorial-text p:first-of-type::first-letter {
+  font-family: var(--font-serif-display);
+  font-size: 3.2rem;
+  float: left;
+  line-height: 0.85;
+  padding-right: 8px;
+  padding-top: 4px;
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+.editorial-quote {
+  font-family: var(--font-serif-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--accent-blue);
+  border-left: 2px solid var(--accent-blue);
+  padding-left: 12px;
+  margin: 12px 0;
+}
+
+/* Número de página y pie */
+.page-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  letter-spacing: 1.2px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.page-footer .edition-tag {
+  font-weight: 600;
+}
+
+.page-footer .page-number {
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+/* =========================================================
+   PORTADA (PAGE 1)
+   ========================================================= */
+.cover-page {
+  background: #FAF8F5;
+  padding: 0;
+}
+
+.cover-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  background: 
+    linear-gradient(135deg, rgba(216, 229, 237, 0.3) 0%, transparent 50%),
+    linear-gradient(0deg, rgba(250, 248, 245, 0.95), rgba(250, 248, 245, 0.95));
+}
+
+.cover-header {
+  text-align: center;
+  border-bottom: 2px solid var(--ink-primary);
+  padding-bottom: 12px;
+  position: relative;
+}
+
+.cover-super-title {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cover-main-title {
+  font-family: var(--font-serif-display);
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--ink-primary);
+  margin-bottom: 6px;
+}
+
+.cover-sub-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding-top: 6px;
+}
+
+.cover-hero-frame {
+  position: relative;
+  width: 100%;
+  height: 285px;
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border: 4px solid #FFFFFF;
+}
+
+.cover-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.cover-hero-frame:hover .cover-hero-img {
+  transform: scale(1.03);
+}
+
+.cover-badge-float {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(28, 30, 33, 0.85);
+  color: #FFF;
+  backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cover-stories {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 10px;
+}
+
+.cover-story-item {
+  border-left: 2px solid var(--accent-blue);
+  padding-left: 10px;
+}
+
+.cover-story-title {
+  font-family: var(--font-serif-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  line-height: 1.15;
+}
+
+.cover-story-desc {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  line-height: 1.25;
+}
+
+.cover-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding-top: 10px;
+}
+
+.barcode-area {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.barcode-svg {
+  width: 110px;
+  height: 24px;
+}
+
+.barcode-num {
+  font-family: monospace;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--ink-muted);
+}
+
+.cover-price-tag {
+  text-align: right;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.cover-price-tag span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+/* =========================================================
+   POLAROIDS & FILMS (DISEÑO FOTOGRÁFICO)
+   ========================================================= */
+.polaroid-card {
+  background: #FFFFFF;
+  padding: 8px 8px 18px 8px;
+  box-shadow: var(--shadow-polaroid);
+  border-radius: 2px;
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.polaroid-card:hover {
+  transform: scale(1.04) rotate(0deg) !important;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.polaroid-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+  background: #F0EDE6;
+  border-radius: 1px;
+}
+
+.polaroid-img-wrapper.rect {
+  aspect-ratio: 4 / 3;
+}
+
+.polaroid-img-wrapper.portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.polaroid-caption {
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  color: #2D3748;
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.1;
+}
+
+/* Corazón dibujado a mano */
+.hand-heart {
+  color: var(--accent-blue);
+  font-size: 0.85rem;
+  margin-left: 3px;
+  display: inline-block;
+}
+
+/* Cinta adhesiva decorativa */
+.washi-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 18px;
+  background: rgba(220, 215, 200, 0.65);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-left: 2px dashed rgba(0,0,0,0.1);
+  border-right: 2px dashed rgba(0,0,0,0.1);
+  z-index: 4;
+}
+
+/* Tiras de película (Filmstrip) como en la carta de la Edición 1 */
+.filmstrip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  background: #111315;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  margin-top: auto;
+}
+
+.filmstrip-item {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filmstrip-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.filmstrip-item:hover img {
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   ELEMENTOS DE VIDEO INTERACTIVO
+   ========================================================= */
+.video-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.78);
+  color: #FFF;
+  font-size: 0.62rem;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  backdrop-filter: blur(4px);
+  z-index: 3;
+}
+
+.video-badge svg {
+  width: 10px;
+  height: 10px;
+  fill: #FF5252;
+}
+
+.video-play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease;
+}
+
+.polaroid-card:hover .video-play-overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.play-circle-btn {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.polaroid-card:hover .play-circle-btn {
+  transform: scale(1.15);
+}
+
+.play-circle-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent-blue);
+  margin-left: 2px;
+}
+
+/* Tarjeta especial del Ferxxo */
+.ferxxo-card {
+  border: 2px solid var(--ferxxo-green);
+  box-shadow: 0 10px 25px rgba(0, 230, 118, 0.15) !important;
+}
+
+.ferxxo-card .play-circle-btn svg {
+  fill: #00A854;
+}
+
+.ferxxo-card .video-badge {
+  background: rgba(0, 230, 118, 0.9);
+  color: #000;
+}
+
+.ferxxo-card .video-badge svg {
+  fill: #000;
+}
+
+/* =========================================================
+   DISEÑOS DE COMPOSICIÓN (GRID Y DISPOSICIONES)
+   ========================================================= */
+.two-col-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.polaroid-cluster {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  margin-top: 8px;
+}
+
+.rot-neg-4 { transform: rotate(-4deg); }
+.rot-pos-3 { transform: rotate(3deg); }
+.rot-neg-2 { transform: rotate(-2deg); }
+.rot-pos-5 { transform: rotate(5deg); }
+.rot-neg-6 { transform: rotate(-6deg); }
+
+/* Firma de autor */
+.signature-box {
+  margin-top: 10px;
+  text-align: right;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  color: var(--accent-blue);
+}
+
+/* Tabla de Contenido / Sumario */
+.toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.toc-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+  padding-bottom: 4px;
+}
+
+.toc-num {
+  font-family: var(--font-serif-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  width: 32px;
+}
+
+.toc-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ink-primary);
+  flex: 1;
+}
+
+.toc-page {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+/* =========================================================
+   CONTROLES INFERIORES DE LA REVISTA
+   ========================================================= */
+.bottom-controls {
+  position: fixed;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(21, 26, 30, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 8px 18px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFF;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.08);
+}
+
+.control-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.page-indicator {
+  color: #E2E8F0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0 6px;
+}
+
+/* Botones flotantes de navegación lateral */
+.nav-arrow-float {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(21, 26, 30, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 90;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nav-arrow-float:hover {
+  background: rgba(62, 107, 137, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow-float.left { left: 24px; }
+.nav-arrow-float.right { right: 24px; }
+
+.nav-arrow-float svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* =========================================================
+   MODAL DE VIDEO (CINEMA LIGHTBOX)
+   ========================================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 12, 16, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content-box {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  background: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transform: scale(0.92);
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.modal-overlay.active .modal-content-box {
+  transform: scale(1);
+}
+
+.modal-video-player {
+  width: 100%;
+  max-height: 75vh;
+  display: block;
+  background: #000;
+}
+
+.modal-info-bar {
+  background: #151A1E;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFF;
+}
+
+.modal-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.modal-subtitle {
+  font-size: 0.72rem;
+  color: #94A3B8;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #FFF;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #FF5252;
+}
+
+/* =========================================================
+   OVERLAY DE INICIO (BIENVENIDA & ACTIVACIÓN DE AUDIO)
+   ========================================================= */
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(14, 18, 22, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.welcome-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-card {
+  background: #FAF8F5;
+  border-radius: 12px;
+  padding: 40px 36px;
+  max-width: 440px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.welcome-card h2 {
+  font-family: var(--font-serif-display);
+  font-size: 1.85rem;
+  color: var(--ink-primary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.welcome-card .edition-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.welcome-card p {
+  font-family: var(--font-serif-body);
+  font-size: 1.15rem;
+  color: var(--ink-secondary);
+  line-height: 1.45;
+  margin-bottom: 28px;
+}
+
+.start-btn {
+  background: var(--ink-primary);
+  color: #FFF;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+  background: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(62, 107, 137, 0.4);
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (MÓVIL Y TABLET)
+   ========================================================= */
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 0 14px;
+    height: 52px;
+  }
+  
+  .nav-title h1 {
+    font-size: 0.85rem;
+  }
+  
+  .music-info {
+    display: none;
+  }
+  
+  .magazine-viewport {
+    height: calc(100vh - 110px);
+    margin-top: 52px;
+    padding: 8px;
+  }
+  
+  .page-content {
+    padding: 24px 20px 20px 20px;
+  }
+  
+  .page-title {
+    font-size: 1.35rem;
+  }
+  
+  .editorial-text {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+  
+  .editorial-text p:first-of-type::first-letter {
+    font-size: 2.4rem;
+  }
+  
+  .nav-arrow-float {
+    display: none; /* en móvil se usa el deslizamiento táctil */
+  }
+  
+  .bottom-controls {
+    bottom: 8px;
+    padding: 6px 14px;
+  }
+  
+  .polaroid-cluster {
+    height: 220px;
+  }
+}
