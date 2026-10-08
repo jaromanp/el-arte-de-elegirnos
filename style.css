@@ -89,6 +89,28 @@ body {
   text-transform: uppercase;
 }
 
+.download-pdf-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+}
+
+.download-pdf-btn:hover {
+  background: rgba(62, 107, 137, 0.85);
+  border-color: rgba(216, 229, 237, 0.4);
+  transform: translateY(-1px);
+}
+
 .music-player-btn {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);

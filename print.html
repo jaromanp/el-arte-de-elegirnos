@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>El Arte de Elegirnos — Vol. II (Versión Imprimible)</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    @page {
+      size: 148mm 210mm; /* Formato A5 editorial / media carta */
+      margin: 0;
+    }
+
+    :root {
+      --paper-bg: #FAF8F5;
+      --ink-primary: #1C1E21;
+      --ink-secondary: #4A4F55;
+      --ink-muted: #7E858E;
+      --accent-blue: #3E6B89;
+      --accent-gold: #C5A059;
+      --ferxxo-green: #00C853;
+      --font-serif-display: 'Playfair Display', Georgia, serif;
+      --font-serif-body: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Montserrat', sans-serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      background: #E5E5E5;
+      font-family: var(--font-sans);
+      color: var(--ink-primary);
+    }
+
+    .print-sheet {
+      width: 148mm;
+      height: 210mm;
+      max-height: 210mm;
+      background: var(--paper-bg);
+      background-image: radial-gradient(#00000006 1px, transparent 1px);
+      background-size: 16px 16px;
+      page-break-after: always;
+      break-after: page;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    .sheet-inner {
+      width: 100%;
+      height: 100%;
+      padding: 16mm 14mm 12mm 14mm;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* DECORACIÓN BALLENA */
+    .whale-icon {
+      position: absolute;
+      width: 22mm;
+      height: auto;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .whale-top-right {
+      top: 12mm;
+      right: 12mm;
+    }
+
+    .whale-bottom-left {
+      bottom: 12mm;
+      left: 12mm;
+    }
+
+    /* ENCABEZADOS DE PÁGINA */
+    .page-header {
+      margin-bottom: 3.5mm;
+      position: relative;
+      border-bottom: 0.8px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 2mm;
+    }
+
+    .page-category {
+      font-size: 6.5pt;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 1mm;
+    }
+
+    .page-title {
+      font-family: var(--font-serif-display);
+      font-size: 14pt;
+      line-height: 1.15;
+      color: var(--ink-primary);
+      font-weight: 700;
+    }
+
+    /* TEXTO EDITORIAL */
+    .editorial-text {
+      font-family: var(--font-serif-body);
+      font-size: 10.2pt;
+      line-height: 1.45;
+      color: #2D3136;
+      text-align: justify;
+      margin-bottom: 3mm;
+    }
+
+    .editorial-text p {
+      margin-bottom: 2.5mm;
+      text-indent: 4mm;
+    }
+
+    .editorial-text p:first-of-type {
+      text-indent: 0;
+    }
+
+    .editorial-text p:first-of-type::first-letter {
+      font-family: var(--font-serif-display);
+      font-size: 28pt;
+      float: left;
+      line-height: 0.8;
+      padding-right: 2.5mm;
+      padding-top: 1mm;
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .editorial-quote {
+      font-family: var(--font-serif-display);
+      font-style: italic;
+      font-size: 8.5pt;
+      line-height: 1.35;
+      color: var(--accent-blue);
+      border-left: 1.5px solid var(--accent-blue);
+      padding-left: 3mm;
+      margin: 2.5mm 0;
+    }
+
+    /* PIE DE PÁGINA */
+    .page-footer {
+      margin-top: auto;
+      padding-top: 2mm;
+      border-top: 0.6px solid rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 6.5pt;
+      letter-spacing: 1.2px;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    .page-footer .edition-tag {
+      font-weight: 600;
+    }
+
+    .page-footer .page-number {
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    /* POLAROIDS */
+    .polaroid-card {
+      background: #FFFFFF;
+      padding: 2.5mm 2.5mm 5mm 2.5mm;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      border: 0.4px solid rgba(0,0,0,0.06);
+      border-radius: 1px;
+      display: inline-flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .polaroid-img-wrapper {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      position: relative;
+      background: #F0EDE6;
+    }
+
+    .polaroid-img-wrapper.rect {
+      aspect-ratio: 4 / 3;
+    }
+
+    .polaroid-img-wrapper.portrait {
+      aspect-ratio: 3 / 4;
+    }
+
+    .polaroid-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .polaroid-caption {
+      font-family: var(--font-hand);
+      font-size: 9.5pt;
+      color: #2D3748;
+      text-align: center;
+      margin-top: 2mm;
+      line-height: 1.1;
+    }
+
+    .hand-heart {
+      color: var(--accent-blue);
+      font-size: 8pt;
+      margin-left: 1mm;
+      display: inline-block;
+    }
+
+    .washi-tape {
+      position: absolute;
+      top: -2.5mm;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14mm;
+      height: 4.5mm;
+      background: rgba(220, 215, 200, 0.7);
+      border-left: 1px dashed rgba(0,0,0,0.15);
+      border-right: 1px dashed rgba(0,0,0,0.15);
+      z-index: 4;
+    }
+
+    .two-col-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5mm;
+      margin-top: 2mm;
+      align-items: center;
+    }
+
+    .filmstrip-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2mm;
+      background: #111315;
+      padding: 2mm;
+      border-radius: 1px;
+      margin-top: auto;
+    }
+
+    .filmstrip-item {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border: 0.5px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .filmstrip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* PORTADA */
+    .cover-wrapper {
+      width: 100%;
+      height: 100%;
+      padding: 12mm 12mm 10mm 12mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 0.8px solid rgba(0, 0, 0, 0.12);
+      position: relative;
+      background: 
+        linear-gradient(135deg, rgba(216, 229, 237, 0.25) 0%, transparent 50%),
+        linear-gradient(0deg, #FAF8F5, #FAF8F5);
+    }
+
+    .cover-header {
+      text-align: center;
+      border-bottom: 1.5px solid var(--ink-primary);
+      padding-bottom: 2.5mm;
+    }
+
+    .cover-super-title {
+      font-size: 5.5pt;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      font-weight: 700;
+      margin-bottom: 1mm;
+    }
+
+    .cover-main-title {
+      font-family: var(--font-serif-display);
+      font-size: 19pt;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--ink-primary);
+      margin-bottom: 1.5mm;
+    }
+
+    .cover-sub-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 6pt;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--ink-secondary);
+      border-top: 0.6px solid rgba(0, 0, 0, 0.15);
+      padding-top: 1.5mm;
+    }
+
+    .cover-hero-frame {
+      width: 100%;
+      height: 64mm;
+      margin: 3mm 0;
+      overflow: hidden;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .cover-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .cover-badge-float {
+      position: absolute;
+      bottom: 2.5mm;
+      right: 2.5mm;
+      background: rgba(28, 30, 33, 0.9);
+      color: #FFF;
+      padding: 1.5mm 3mm;
+      border-radius: 10px;
+      font-size: 6.5pt;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+    }
+
+    .cover-stories {
+      display: flex;
+      flex-direction: column;
+      gap: 2mm;
+      margin-bottom: 2mm;
+    }
+
+    .cover-story-item {
+      border-left: 1.5px solid var(--accent-blue);
+      padding-left: 2.5mm;
+    }
+
+    .cover-story-title {
+      font-family: var(--font-serif-display);
+      font-size: 8pt;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .cover-story-desc {
+      font-size: 5.8pt;
+      color: var(--ink-muted);
+      line-height: 1.2;
+    }
+
+    .cover-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-top: 0.8px solid rgba(0, 0, 0, 0.12);
+      padding-top: 2.5mm;
+    }
+
+    .barcode-svg {
+      width: 28mm;
+      height: 6mm;
+    }
+
+    .barcode-num {
+      font-family: monospace;
+      font-size: 5.5pt;
+      letter-spacing: 1.5px;
+      color: var(--ink-muted);
+    }
+
+    .cover-price-tag {
+      text-align: right;
+      font-size: 6pt;
+      font-weight: 600;
+      color: var(--ink-secondary);
+    }
+
+    .cover-price-tag span {
+      display: block;
+      font-size: 7.5pt;
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .signature-box {
+      margin-top: 2mm;
+      text-align: right;
+      font-family: var(--font-hand);
+      font-size: 13pt;
+      color: var(--accent-blue);
+      line-height: 1.1;
+    }
+
+    .toc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5mm;
+      margin: 3mm 0;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 0.5px dotted rgba(0, 0, 0, 0.25);
+      padding-bottom: 1mm;
+    }
+
+    .toc-num {
+      font-family: var(--font-serif-display);
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--accent-blue);
+      width: 8mm;
+    }
+
+    .toc-name {
+      font-size: 7.5pt;
+      font-weight: 600;
+      color: var(--ink-primary);
+      flex: 1;
+    }
+
+    .toc-page {
+      font-family: monospace;
+      font-size: 7pt;
+      color: var(--ink-muted);
+    }
+
+    .ferxxo-card {
+      border: 1.5px solid var(--ferxxo-green);
+    }
+
+    .rot-neg-2 { transform: rotate(-1.5deg); }
+    .rot-pos-2 { transform: rotate(1.5deg); }
+    .rot-neg-3 { transform: rotate(-2deg); }
+    .rot-pos-3 { transform: rotate(2deg); }
+    .rot-pos-4 { transform: rotate(2.5deg); }
+    .rot-neg-4 { transform: rotate(-2.5deg); }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       PÁGINA 1: PORTADA
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="cover-wrapper">
+      <div class="cover-header">
+        <span class="cover-super-title">Edición Especial Aniversario • 7 de Octubre</span>
+        <h2 class="cover-main-title">El Arte de Elegirnos</h2>
+        <div class="cover-sub-bar">
+          <span>Volumen II</span>
+          <span>Alejo & Matt</span>
+          <span>4 Meses</span>
+        </div>
+      </div>
+
+      <div class="cover-hero-frame">
+        <img src="assets/images/salidas/salidas_7.jpg" alt="Alejo y Mateo" class="cover-hero-img">
+        <div class="cover-badge-float">Cuatro Meses Eligiéndote ♥</div>
+      </div>
+
+      <div class="cover-stories">
+        <div class="cover-story-item">
+          <div class="cover-story-title">El viento a nuestro favor</div>
+          <div class="cover-story-desc">Tarde de cometas con la familia y el vuelo que nos unió más.</div>
+        </div>
+        <div class="cover-story-item">
+          <div class="cover-story-title">Escapada a Santa Fe de Antioquia</div>
+          <div class="cover-story-desc">Cold brew de tamarindo, Al Alma y una noche de pura complicidad.</div>
+        </div>
+        <div class="cover-story-item">
+          <div class="cover-story-title">Un sueño hecho realidad: La noche del Ferxxo</div>
+          <div class="cover-story-desc">Cantar y bailar entre luces verdes de tu mano.</div>
+        </div>
+        <div class="cover-story-item">
+          <div class="cover-story-title">De Montería a Coveñas: Tu tierra y el mar</div>
+          <div class="cover-story-desc">Los planchones del Sinú, la playa juntos y el mejor guía del mundo.</div>
+        </div>
+        <div class="cover-story-item" style="border-left-color: #2E7D32;">
+          <div class="cover-story-title">Próximo destino: Ver ballenas en Nuquí</div>
+          <div class="cover-story-desc">El sueño que sella nuestro mesniversario y continúa nuestra historia.</div>
+        </div>
+      </div>
+
+      <div class="cover-footer">
+        <div class="barcode-area">
+          <svg class="barcode-svg" viewBox="0 0 100 24" fill="#1C1E21">
+            <rect x="0" y="0" width="2" height="24"/><rect x="4" y="0" width="1" height="24"/><rect x="7" y="0" width="3" height="24"/><rect x="12" y="0" width="1" height="24"/><rect x="15" y="0" width="2" height="24"/><rect x="19" y="0" width="4" height="24"/><rect x="25" y="0" width="1" height="24"/><rect x="28" y="0" width="2" height="24"/><rect x="32" y="0" width="3" height="24"/><rect x="37" y="0" width="1" height="24"/><rect x="40" y="0" width="2" height="24"/><rect x="44" y="0" width="4" height="24"/><rect x="50" y="0" width="1" height="24"/><rect x="53" y="0" width="3" height="24"/><rect x="58" y="0" width="2" height="24"/><rect x="62" y="0" width="1" height="24"/><rect x="65" y="0" width="3" height="24"/><rect x="70" y="0" width="2" height="24"/><rect x="74" y="0" width="1" height="24"/><rect x="77" y="0" width="4" height="24"/><rect x="83" y="0" width="2" height="24"/><rect x="87" y="0" width="1" height="24"/><rect x="90" y="0" width="3" height="24"/><rect x="95" y="0" width="2" height="24"/><rect x="99" y="0" width="1" height="24"/>
+          </svg>
+          <div class="barcode-num">07-10-2026-VOL-02</div>
+        </div>
+        <div class="cover-price-tag">
+          PRECIO:
+          <span>Un beso tuyo ♥</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 2: CARTA DEL EDITOR
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <svg class="whale-icon whale-top-right" viewBox="0 0 160 80" fill="none">
+        <path d="M145 35 C130 18 95 10 60 18 C35 23 15 35 5 45 C18 43 32 40 45 42 C40 50 25 56 12 55 C28 58 46 54 58 48 C85 52 115 48 135 38 C145 35 155 28 158 22 C154 28 148 32 145 35 Z" fill="#6B8A9E"/>
+        <path d="M72 45 C65 58 52 68 45 70 C48 64 56 52 64 45 Z" fill="#527083"/>
+        <path d="M5 45 C-2 36 2 28 8 26 C6 33 8 40 5 45 Z" fill="#6B8A9E"/>
+        <path d="M5 45 C-4 52 -1 62 6 63 C4 56 5 49 5 45 Z" fill="#527083"/>
+      </svg>
+
+      <div class="page-header">
+        <span class="page-category">Para Ti</span>
+        <h2 class="page-title">Carta del editor</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Hace algún tiempo me sorprendiste con el regalo más hermoso y significativo que jamás había recibido: el primer volumen de nuestra historia. Cada una de tus palabras, cada foto y cada detalle me hicieron sentir la persona más afortunada y querida del mundo.</p>
+        <p>Hoy, al celebrar nuestros cuatro meses de novios, me corresponde a mí tomar la pluma. Y no existe nada que me haga más feliz que plasmar en esta segunda edición un pedacito de todo lo mágico que hemos vivido juntos desde entonces.</p>
+        <p>Si en tu carta decías que la vida se encarga de ir poniendo todo en su lugar, hoy puedo decirte con absoluta certeza que tú eres mi lugar favorito. Gracias por estos cuatro meses de amor sincero, de risas que curan cualquier mal día y de una complicidad tan bonita. Esta revista es mi manera de recordarte que elegirte cada día sigue siendo el arte más fácil y maravilloso de mi vida.</p>
+      </div>
+
+      <div class="signature-box">
+        Con todo mi amor,<br>
+        <strong>Tu príncipe, Alejo.</strong>
+      </div>
+
+      <div class="filmstrip-grid">
+        <div class="filmstrip-item"><img src="assets/images/salidas/salidas_1.jpg" alt="Recuerdo"></div>
+        <div class="filmstrip-item"><img src="assets/images/salidas/salidas_2.jpg" alt="Recuerdo"></div>
+        <div class="filmstrip-item"><img src="assets/images/salidas/salidas_6.jpg" alt="Recuerdo"></div>
+        <div class="filmstrip-item"><img src="assets/images/salidas/salidas_9.jpg" alt="Recuerdo"></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">02</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 3: ÍNDICE
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Sumario</span>
+        <h2 class="page-title">Cuatro meses, infinitas razones</h2>
+      </div>
+
+      <div class="toc-list">
+        <div class="toc-item">
+          <span class="toc-num">04</span>
+          <span class="toc-name">El viento a nuestro favor (Cometas en familia)</span>
+          <span class="toc-page">Pág. 04</span>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">06</span>
+          <span class="toc-name">Nuestra escapada a Santa Fe de Antioquia</span>
+          <span class="toc-page">Pág. 06</span>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">08</span>
+          <span class="toc-name">La magia de lo cotidiano & El sueño del Ferxxo</span>
+          <span class="toc-page">Pág. 08</span>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">10</span>
+          <span class="toc-name">De Montería a Coveñas: Tu tierra natal y el mar</span>
+          <span class="toc-page">Pág. 10</span>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">12</span>
+          <span class="toc-name">Próximo destino: Ver ballenas en Nuquí</span>
+          <span class="toc-page">Pág. 12</span>
+        </div>
+        <div class="toc-item">
+          <span class="toc-num">14</span>
+          <span class="toc-name">Contraportada & Nuestra historia continuará</span>
+          <span class="toc-page">Pág. 14</span>
+        </div>
+      </div>
+
+      <div class="polaroid-card rot-pos-3" style="margin: 2mm auto 0 auto; max-width: 55mm;">
+        <div class="washi-tape"></div>
+        <div class="polaroid-img-wrapper portrait">
+          <img src="assets/images/salidas/salidas_3.jpg" alt="Nosotros" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Elegirte hoy y siempre <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="editorial-quote" style="margin-top: 3mm;">
+        "Porque no son solo cuatro meses; son cuatro meses descubriendo que el amor verdadero es tranquilo, dulce y cómplice."
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">03</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 4: COMETAS (HISTORIA)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Familia & Amigos</span>
+        <h2 class="page-title">El viento a nuestro favor</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Siempre dicen que compartir con la familia de quien amas es un paso importante, pero contigo todo fluyó con una ternura tan natural que me llenó el pecho de paz. Ese paseo de cometas con mis papás y mis amigos se convirtió en una de las tardes más entrañables que guardo en el corazón.</p>
+        <p>Recuerdo con una sonrisa que la cometa que compramos simplemente no quería colaborar; por más carreras e intentos que hacíamos, no lograba mantenerse en el aire. Pero lo que verdaderamente me derritió el alma fue ver a mi papá haciendo hasta lo imposible para que tú pudieras volar una cometa.</p>
+        <p>Al ver que la nuestra no respondía, mi papá no dudó ni un segundo: con la mayor generosidad te soltó su propia cometa para que sintieras la emoción de verla bailar alto contra las nubes. Verte ahí, sonriendo con el hilo en la mano y compartiendo con él con tanta calidez, me hizo sentir la persona más orgullosa y feliz. Nada me hace más bien que ver lo bien que te llevas con toda mi gente.</p>
+      </div>
+
+      <div class="polaroid-card rot-neg-2" style="max-width: 52mm; margin: 0 auto;">
+        <div class="polaroid-img-wrapper portrait">
+          <img src="assets/images/cometas/cometas_1.jpg" alt="Tarde de cometas" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Una tarde que nunca olvidaré <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">04</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 5: COMETAS (GALERÍA)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Momentos</span>
+        <h2 class="page-title">Volando alto contigo</h2>
+      </div>
+
+      <div class="two-col-layout">
+        <div class="polaroid-card rot-neg-4">
+          <div class="washi-tape"></div>
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/cometas/cometas_2.jpg" alt="Cometas" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Risas compartidas <span class="hand-heart">♥</span></div>
+        </div>
+
+        <div class="polaroid-card rot-pos-4">
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/cometas/cometas_3.jpg" alt="Cometas" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Encajando perfecto <span class="hand-heart">♥</span></div>
+        </div>
+      </div>
+
+      <div class="polaroid-card rot-pos-2" style="max-width: 54mm; margin: 3mm auto 0 auto;">
+        <div class="polaroid-img-wrapper portrait">
+          <img src="assets/images/cometas/cometas_4.jpg" alt="Cometas" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">El viento en nuestras manos <span class="hand-heart">♥</span></div>
+      </div>
+
+      <svg class="whale-icon whale-bottom-left" viewBox="0 0 160 80" fill="none">
+        <path d="M145 35 C130 18 95 10 60 18 C35 23 15 35 5 45 C18 43 32 40 45 42 C40 50 25 56 12 55 C28 58 46 54 58 48 C85 52 115 48 135 38 C145 35 155 28 158 22 C154 28 148 32 145 35 Z" fill="#6B8A9E"/>
+        <path d="M72 45 C65 58 52 68 45 70 C48 64 56 52 64 45 Z" fill="#527083"/>
+      </svg>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">05</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 6: SANTA FE (HISTORIA)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Escapada Romántica</span>
+        <h2 class="page-title">Santa Fe de Antioquia</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Hacernos una escapada solo para los dos era justo lo que necesitábamos. Santa Fe nos recibió con su arquitectura colonial, su cielo despejado y ese calor acogedor que nos invitaba a caminar sin prisas, tomados de la mano por sus callecitas empedradas.</p>
+        <p>Recuerdo con tanto cariño detenernos a probar ese cold brew de tamarindo tan refrescante y original, perfecto para calmar el calor de la tarde. Luego, nuestro almuerzo en Al Alma fue simplemente exquisito: buena mesa, miradas cómplices y esas conversaciones profundas donde el mundo exterior parece desaparecer por completo.</p>
+        <p>Y al caer la noche, la magia del pueblo se transformó en un refugio íntimo. Vivimos una noche inolvidable, llena de romanticismo, caricias, risas compartidas y una pasión tan bonita que me recordó que, sin importar el lugar en el mapa, mi verdadero destino siempre eres tú.</p>
+      </div>
+
+      <div class="polaroid-card rot-neg-2" style="max-width: 65mm; margin: 0 auto;">
+        <div class="washi-tape"></div>
+        <div class="polaroid-img-wrapper rect">
+          <img src="assets/images/santafe/santafe_1.jpg" alt="Santa Fe" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Caminando a tu lado por Santa Fe <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">06</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 7: SANTA FE (FOTOS & RECUERDOS)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Momentos</span>
+        <h2 class="page-title">Calor, sabor y complicidad</h2>
+      </div>
+
+      <div class="polaroid-card rot-pos-2" style="max-width: 66mm; margin: 0 auto 3mm auto;">
+        <div class="polaroid-img-wrapper rect">
+          <img src="assets/images/santafe/santafe_2.jpg" alt="Santa Fe" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Memorias de nuestra escapada <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="two-col-layout">
+        <div class="polaroid-card rot-neg-3">
+          <div class="polaroid-img-wrapper rect">
+            <img src="assets/images/santafe/santafe_3.jpg" alt="Santa Fe" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Al Alma & Tamarindo <span class="hand-heart">♥</span></div>
+        </div>
+
+        <div class="polaroid-card rot-pos-3">
+          <div class="polaroid-img-wrapper rect">
+            <img src="assets/images/santafe/santafe_4.jpg" alt="Santa Fe" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Noche inolvidable <span class="hand-heart">♥</span></div>
+        </div>
+      </div>
+
+      <div class="editorial-quote" style="margin-top: 3mm;">
+        "El calor no estaba solo en el clima de Santa Fe, sino en cada abrazo que nos dimos."
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">07</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 8: COTIDIANIDAD (SALIDAS & CINE)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Planes Juntos</span>
+        <h2 class="page-title">La magia de lo cotidiano</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Aunque los grandes viajes quedan grabados para siempre, me he dado cuenta de que me enamoro de ti en las cosas más sencillas de todos los días. En nuestras salidas al cine compartiendo palomitas, en las cenas improvisadas donde descubrimos nuevos sabores y en esas risas tontas de camino a casa.</p>
+        <p>Tenerte en mi rutina diaria transforma lo ordinario en un momento extraordinario. Es la tranquilidad de saber que contigo puedo ser exactamente quien soy, con la certeza de que siempre encuentro en ti un abrazo seguro y una sonrisa sincera.</p>
+      </div>
+
+      <div class="two-col-layout">
+        <div class="polaroid-card rot-neg-3">
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/salidas/salidas_4.jpg" alt="Salidas" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Cómplices de siempre <span class="hand-heart">♥</span></div>
+        </div>
+
+        <div class="polaroid-card rot-pos-4">
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/salidas/salidas_5.jpg" alt="Salidas" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Cada día contigo <span class="hand-heart">♥</span></div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">08</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 9: EL SUEÑO DEL FERXXO
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Un Sueño Cumplido</span>
+        <h2 class="page-title">La noche del Ferxxo</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Si hay una noche en la que sentí que el corazón se me salía del pecho de la felicidad, fue esa. Cuando me regalaste las boletas para ir al concierto del Ferxxo, me cumpliste un sueño que llevaba anhelando hace mucho tiempo.</p>
+        <p>Bailar y cantar cada canción a todo pulmón junto a ti, iluminados por las luces verdes y la euforia del lugar, fue una experiencia que jamás voy a olvidar. Mirarte en medio del show y saber que estaba viviendo ese instante perfecto con el amor de mi vida no tuvo precio. Gracias por hacerme tan inmensamente feliz, amorcito.</p>
+      </div>
+
+      <div class="polaroid-card ferxxo-card rot-neg-2" style="max-width: 66mm; margin: 0 auto;">
+        <div class="polaroid-img-wrapper rect">
+          <img src="assets/images/salidas/ferxxo_thumb.jpg" alt="Concierto Ferxxo" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Perreando y cantando de tu mano <span class="hand-heart">💚</span></div>
+      </div>
+
+      <div class="polaroid-card rot-pos-3" style="max-width: 45mm; margin: 2.5mm auto 0 auto;">
+        <div class="polaroid-img-wrapper portrait">
+          <img src="assets/images/salidas/salidas_8.jpg" alt="Nosotros" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Inolvidable <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">09</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 10: MONTERÍA Y COVEÑAS (EL MAR)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Gran Viaje</span>
+        <h2 class="page-title">De Montería a Coveñas</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Este viaje fue, sin duda, uno de los capítulos más anhelados y especiales de nuestra historia. Por fin pudimos escaparnos a Coveñas y disfrutar del mar juntos: sentir la brisa cálida, caminar descalzos por la arena y contemplar el horizonte con la alegría de sabernos juntos.</p>
+        <p>La comida de mar fue un deleite total; todavía recuerdo el sabor increíble de ese spaghetti de frutos del mar en nuestro último restaurante. Pero nada superó el amor hogareño del delicioso pescado que nos preparó tu nana con sus propias manos, haciéndome sentir acogido y en familia.</p>
+      </div>
+
+      <div class="polaroid-card rot-neg-2" style="max-width: 65mm; margin: 0 auto 2.5mm auto;">
+        <div class="polaroid-img-wrapper rect">
+          <img src="assets/images/monteria/monteria_4.jpg" alt="Coveñas" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">El mar a tus pies <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="two-col-layout">
+        <div class="polaroid-card rot-pos-3">
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/monteria/monteria_5.jpg" alt="Playa Coveñas" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Sol y arena <span class="hand-heart">♥</span></div>
+        </div>
+        <div class="polaroid-card rot-neg-4">
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/monteria/monteria_3.jpg" alt="Coveñas" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Felicidad pura <span class="hand-heart">♥</span></div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">10</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 11: MONTERÍA (TU TIERRA & EL SINÚ)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">Tu Tierra Natal</span>
+        <h2 class="page-title">El Sinú, tu guía y tu casa</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Llegar a Montería y verte en tu tierra fue una experiencia que me desbordó de orgullo y cariño. Fuiste el mejor guía turístico que jamás pude soñar: me encantó escucharte hablar con tanta pasión de tus raíces, contándome historias de cada rincón y mostrándome todo lo hermoso de tu ciudad natal.</p>
+        <p>Quedé completamente fascinado con los planchones y esa magia tan única de ver cómo cruzaban el río Sinú sin necesidad de motor, flotando con la fuerza de la corriente y la destreza de su gente. Y conocer tu casa, el lugar donde creciste y que guarda tantos de tus recuerdos, me hizo sentir más cerca de ti que nunca. Me abriste las puertas de tu vida entera.</p>
+      </div>
+
+      <div class="two-col-layout">
+        <div class="polaroid-card rot-neg-3">
+          <div class="polaroid-img-wrapper rect">
+            <img src="assets/images/monteria/planchon_thumb.jpg" alt="Río Sinú y Planchones" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Los planchones del Sinú <span class="hand-heart">♥</span></div>
+        </div>
+
+        <div class="polaroid-card rot-pos-3">
+          <div class="polaroid-img-wrapper rect">
+            <img src="assets/images/monteria/monteria_6.jpg" alt="Montería" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Tu hogar, mi lugar <span class="hand-heart">♥</span></div>
+        </div>
+      </div>
+
+      <div class="polaroid-card rot-pos-2" style="max-width: 50mm; margin: 2.5mm auto 0 auto;">
+        <div class="polaroid-img-wrapper portrait">
+          <img src="assets/images/monteria/monteria_2.jpg" alt="Nosotros en Montería" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Enamorados en Montería <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">11</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 12: EL PRÓXIMO SUEÑO — VER BALLENAS EN NUQUÍ
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <svg class="whale-icon whale-top-right" style="width: 26mm; opacity: 0.9;" viewBox="0 0 160 80" fill="none">
+        <path d="M145 35 C130 18 95 10 60 18 C35 23 15 35 5 45 C18 43 32 40 45 42 C40 50 25 56 12 55 C28 58 46 54 58 48 C85 52 115 48 135 38 C145 35 155 28 158 22 C154 28 148 32 145 35 Z" fill="#3E6B89"/>
+        <path d="M72 45 C65 58 52 68 45 70 C48 64 56 52 64 45 Z" fill="#2A4D63"/>
+        <path d="M5 45 C-2 36 2 28 8 26 C6 33 8 40 5 45 Z" fill="#3E6B89"/>
+        <path d="M5 45 C-4 52 -1 62 6 63 C4 56 5 49 5 45 Z" fill="#2A4D63"/>
+      </svg>
+
+      <div class="page-header">
+        <span class="page-category">Próximo Capítulo • Nuestro Mesniversario</span>
+        <h2 class="page-title">Rumbo a Nuquí: Ver ballenas juntos</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Todas las ballenas que han nadado por las páginas de nuestra historia —desde el primer día en que me regalaste el Volumen 1 hasta hoy— nunca estuvieron aquí por casualidad. Representan el latido de un sueño compartido que hace mucho tiempo queríamos hacer realidad: presenciar la grandeza de las ballenas jorobadas en el Pacífico colombiano, en Nuquí.</p>
+        <p>Y hoy, para terminar de celebrar nuestro mesniversario por todo lo alto, ese sueño deja de ser un anhelo lejano para convertirse en nuestro próximo destino. Nos espera el sonido imponente de la selva tocando el océano, el vaivén del agua salada y la emoción indescriptible de ver a esos gigantes marinos emerger ante nuestros ojos.</p>
+        <p>Cumplir este sueño tomado de tu mano es el recordatorio más hermoso de que cada meta, cada viaje y cada ilusión a tu lado se multiplica por mil.</p>
+      </div>
+
+      <div class="polaroid-card rot-neg-3" style="max-width: 56mm; margin: 2mm auto 0 auto;">
+        <div class="washi-tape"></div>
+        <div class="polaroid-img-wrapper portrait">
+          <img src="assets/images/salidas/salidas_7.jpg" alt="Rumbo a Nuquí" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Siguiente parada: Nuquí <span class="hand-heart">🐋♥</span></div>
+      </div>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">12</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 13: NUESTRA HISTORIA CONTINUARÁ
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="sheet-inner">
+      <div class="page-header">
+        <span class="page-category">El Viaje Apenas Comienza</span>
+        <h2 class="page-title">Nuestra historia continuará...</h2>
+      </div>
+
+      <div class="editorial-text">
+        <p>Nuquí no será el final de un viaje, sino el comienzo de todas las travesías que aún nos esperan. Porque estos cuatro meses me han enseñado que no importa cuál sea el destino en el mapa: lo que hace que cada lugar sea mágico es compartirlo contigo.</p>
+        <p>Seguiremos coleccionando atardeceres, cantando canciones que nos erizan la piel, probando platos deliciosos y apoyándonos en cada sueño. Eres mi hogar, mi paz y mi aventura favorita.</p>
+      </div>
+
+      <div class="two-col-layout" style="margin-top: 3mm;">
+        <div class="polaroid-card rot-pos-4">
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/monteria/monteria_1.jpg" alt="Juntos" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Siempre a tu lado <span class="hand-heart">♥</span></div>
+        </div>
+
+        <div class="polaroid-card rot-neg-3">
+          <div class="polaroid-img-wrapper portrait">
+            <img src="assets/images/salidas/salidas_9.jpg" alt="Nosotros" class="polaroid-img">
+          </div>
+          <div class="polaroid-caption">Tú y yo, siempre <span class="hand-heart">♥</span></div>
+        </div>
+      </div>
+
+      <div class="editorial-quote" style="margin-top: 4mm;">
+        "En medio de la inmensidad del océano de Nuquí, el milagro más grande siempre será haberte encontrado a ti."
+      </div>
+
+      <svg class="whale-icon whale-bottom-left" viewBox="0 0 160 80" fill="none">
+        <path d="M145 35 C130 18 95 10 60 18 C35 23 15 35 5 45 C18 43 32 40 45 42 C40 50 25 56 12 55 C28 58 46 54 58 48 C85 52 115 48 135 38 C145 35 155 28 158 22 C154 28 148 32 145 35 Z" fill="#6B8A9E"/>
+        <path d="M72 45 C65 58 52 68 45 70 C48 64 56 52 64 45 Z" fill="#527083"/>
+      </svg>
+
+      <div class="page-footer">
+        <span class="edition-tag">El Arte de Elegirnos • Vol. II</span>
+        <span class="page-number">13</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       PÁGINA 14: CONTRAPORTADA (BACK COVER)
+       ========================================================= -->
+  <div class="print-sheet">
+    <div class="cover-wrapper" style="text-align: center; justify-content: space-around;">
+      <div class="cover-header" style="border-bottom: none;">
+        <span class="cover-super-title">Cierre de Edición • 4to Mes</span>
+        <h2 class="cover-main-title" style="font-size: 16pt;">El Arte de Seguir Eligiéndote</h2>
+      </div>
+
+      <div class="polaroid-card rot-neg-2" style="max-width: 55mm; margin: 0 auto;">
+        <div class="washi-tape"></div>
+        <div class="polaroid-img-wrapper portrait">
+          <img src="assets/images/salidas/salidas_6.jpg" alt="Para siempre" class="polaroid-img">
+        </div>
+        <div class="polaroid-caption">Contigo, todo es más bonito <span class="hand-heart">♥</span></div>
+      </div>
+
+      <div class="editorial-text" style="text-align: center; font-size: 10.5pt; max-width: 95mm; margin: 0 auto;">
+        <p style="text-indent: 0;">"Dicen que amar no es coincidir una sola vez, sino decidir quedarse cada mañana. En estos cuatro meses he confirmado que elegirte es la decisión más dulce, acertada y feliz de mi vida."</p>
+        <p style="text-indent: 0; margin-top: 2.5mm; font-weight: 600; color: var(--accent-blue);">
+          ¡Feliz 4to mes de novios, Amorcito!<br>
+          Siempre tuyo,<br>
+          Tu príncipe, Alejo.
+        </p>
+      </div>
+
+      <svg viewBox="0 0 200 90" style="width: 35mm; margin: 0 auto; opacity: 0.9;">
+        <path d="M180 40 C160 20 120 12 75 22 C45 28 20 42 6 55 C22 52 40 48 56 50 C50 60 32 68 15 67 C35 70 58 65 72 58 C105 63 145 58 170 45 C180 42 192 34 196 26 C190 34 184 38 180 40 Z" fill="#3E6B89"/>
+        <path d="M90 54 C82 70 65 82 56 84 C60 76 70 62 80 54 Z" fill="#2A4D63"/>
+        <path d="M6 55 C-2 44 2 34 10 32 C8 40 10 48 6 55 Z" fill="#3E6B89"/>
+        <path d="M6 55 C-4 64 -1 76 8 77 C5 68 6 60 6 55 Z" fill="#2A4D63"/>
+      </svg>
+
+      <div class="cover-footer" style="flex-direction: column; align-items: center; gap: 1mm; border-top: none;">
+        <div style="font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-blue); font-weight: 800;">
+          CONTINUARÁ... EN NUQUÍ & VOLUMEN III 🐋♥
+        </div>
+        <div style="font-size: 6.5pt; color: var(--ink-muted); letter-spacing: 1px;">
+          Alejo & Matt • Cuatro Meses Juntos
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
